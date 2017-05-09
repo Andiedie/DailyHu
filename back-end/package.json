@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "callsite": "^1.0.0",
     "cheerio": "^0.22.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",

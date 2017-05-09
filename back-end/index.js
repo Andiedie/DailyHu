@@ -9,4 +9,4 @@ const app = new Koa();
 app.use(bodyParser());
 app.use(router.routes());
 
-app.listen(process.env.PORT || 8008);
+app.listen(process.env.PORT || config.port || 8008);

@@ -1,10 +1,3 @@
-const services = {};
+const indexify = require('../../lib/indexify');
 
-[
-  'example'
-]
-  .forEach(name => {
-    services[name] = require(`./${name}`);
-  });
-
-module.exports = services;
+module.exports = indexify();

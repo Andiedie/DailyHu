@@ -1,10 +1,3 @@
-const controllers = {};
+const indexify = require('../../lib/indexify');
 
-[
-  'example'
-]
-  .forEach(name => {
-    controllers[name] = require(`./${name}`);
-  });
-
-module.exports = controllers;
+module.exports = indexify();
