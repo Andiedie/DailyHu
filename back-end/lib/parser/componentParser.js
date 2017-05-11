@@ -43,7 +43,7 @@ const component = {
 component.h1 = component.h2 = component.h3 = component.h4 = component.h5 = elem => {
   const pResult = component.p(elem);
   pResult.nodes.forEach(node => {
-    node.type = 'strong';
+    node.type = node.type === 'text' ? 'strong' : node.type;
   });
 
   return pResult;
