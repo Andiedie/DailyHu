@@ -4,7 +4,7 @@ const url = require('url');
 
 module.exports = {
   hostname: 'www.tuicool.com',
-  articleSelector: '.article_body',
+  articleSelector: '.article_detail_bg > h1, .article_body',
   listItemSelector: '.list_article_item',
   maximumPage: 20,
   listUrl (pageNum) {
