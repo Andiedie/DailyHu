@@ -1,23 +1,19 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
 const config = require('./config');
+const assert = require('assert');
+const _ = require('lodash');
+const url = require('url');
+const extract = require('./extract');
 
-/**
- * @param url
- * @return html of the extrated website
- */
-const extract = async (url, selector) => {
-  const html = (await axios.get(url)).data;
-  const $ = cheerio.load(html);
+const getDetail = async function (src) {
+  const hostname = url.parse(src).hostname;
+  const name = hostname.match(/www\.(.+)\.com/)[1];
 
-  const main = $(selector);
-  $('body > *').remove();
-  $('body').append(main);
+  assert(name, 'invalid url.');
 
-  $('script, link').remove();
-  $('head').append('<link rel="stylesheet" href="http://markdowncss.github.io/modest/css/modest.css"/>');
+  const siteConfig = config[name];
+  assert(siteConfig, 'no such site registered.');
 
-  return $.html();
+  return extract(src, siteConfig.articleSelector);
 };
 
-module.exports = extract;
+module.exports = getDetail;

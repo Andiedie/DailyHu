@@ -1,3 +1,3 @@
 module.exports = {
-  hostname: 'http://localhost'
+  hostname: 'http://localhost:8008'
 };
