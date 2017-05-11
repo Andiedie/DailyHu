@@ -1,6 +1,7 @@
 const $ = require('cheerio');
 const globalConfig = require('../../../../config');
 const url = require('url');
+const trimAll = require('../trimAll');
 
 module.exports = {
   hostname: 'www.tuicool.com',
@@ -20,8 +21,16 @@ module.exports = {
     const src = $item.find('a').attr('href');
     res.url = `${globalConfig.hostname}/detail?url=${url.resolve(`http://${this.hostname}`, src)}`;
 
-    res.date = $($item.find('.tip span').get(2)).text().replace(/^\s+|\s+$/g, '');
+    res.date = $($item.find('.tip span').get(2)).text();
 
-    return res;
+    return trimAll(res);
+  },
+  processArticle ($) {
+    $('h1').each((index, h1) => {
+      const $h1 = $(h1);
+      $h1.replaceWith(`<h2>${$h1.text()}</h2>`);
+    });
+
+    return $;
   }
 };

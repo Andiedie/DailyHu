@@ -10,5 +10,6 @@ module.exports = async ctx => {
   } catch (err) {
     ctx.status = 400;
     ctx.body = err.message;
+    console.error(err);
   }
 };
