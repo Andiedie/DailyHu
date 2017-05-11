@@ -14,7 +14,8 @@ const extract = async (url, selector) => {
   $('body').append(main);
 
   $('script, link').remove();
-  $('head').append('<link rel="stylesheet" href="http://markdowncss.github.io/modest/css/modest.css"/>');
+
+  $('head').append('<link rel="stylesheet" href="http://midterm-1252605895.cosgz.myqcloud.com/modest.css"/>');
   $('head').append('<meta name="referrer" content="never">');
 
   return $.html();
