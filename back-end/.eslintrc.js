@@ -4,7 +4,8 @@ module.exports = {
   root: true,
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
