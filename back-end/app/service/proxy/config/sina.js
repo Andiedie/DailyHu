@@ -19,7 +19,6 @@ module.exports = {
     const res = {};
 
     res.thumbnail = item.img;
-    res.type = item.type;   // for test
     res.title = item.title;
     res.url = `${globalConfig.hostname}/detail?url=${item.link}`;
     res.date = item.date;
