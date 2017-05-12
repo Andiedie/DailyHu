@@ -22,7 +22,7 @@ module.exports = {
     const src = $item.find('.topic_title').attr('href');
     res.url = `${globalConfig.hostname}/detail?url=${url.resolve(`http://${this.hostname}`, src)}`;
 
-    res.date = $($item.find('.last_active_time').get(2)).text().replace(/^\s+|\s+$/g, '');
+    res.date = $item.find('.last_active_time').text();
 
     return trimAll(res);
   },

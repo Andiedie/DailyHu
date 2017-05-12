@@ -10,7 +10,7 @@ module.exports = {
   articleSelector: '',
   maximumPage: 1000,
   listUrl (pageNum) {
-    return `http://news-at.zhihu.com/api/4/news/before/${moment().add(pageNum, 'day').format('YYYYMMDD')}`;
+    return `http://news-at.zhihu.com/api/4/news/before/${moment().add(2 - pageNum, 'day').format('YYYYMMDD')}`;
   },
   processList (data) {
     data.stories.forEach(obj => {
