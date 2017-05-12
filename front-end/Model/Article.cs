@@ -22,7 +22,11 @@ namespace front_end.Model {
         }
         public string Thumbnail {
             get { return thumbnail; }
-            set { SetProperty(ref thumbnail, value); }
+            set {
+                if (value == "")
+                    value = @"ms-appx:///Assets/LockScreenLogo.scale-200.png";
+                SetProperty(ref thumbnail, value);
+            }
         }
         public string Title {
             get { return title; }

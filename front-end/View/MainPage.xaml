@@ -60,6 +60,9 @@
                 <Button x:Name="zhihuBtn" Background="Transparent" Width="48" Height="48" Click="switch2Zhihu">
                     <Image Source="../Assets/Icon/zhihu.jpg" Width="25"/>
                 </Button>
+                <Button x:Name="sinaBtn" Background="Transparent" Width="48" Height="48" Click="switch2Sina">
+                    <Image Source="../Assets/Icon/sina.jpg" Width="25"/>
+                </Button>
             </StackPanel>
         </SplitView.Pane>
         <Grid Background="WhiteSmoke">

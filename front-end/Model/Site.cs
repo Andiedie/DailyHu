@@ -8,6 +8,7 @@ namespace front_end.Model {
     public enum Site {
         tuicool,
         cnode,
-        zhihu
+        zhihu,
+        sina
     }
 }

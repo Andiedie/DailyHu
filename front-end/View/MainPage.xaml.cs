@@ -78,6 +78,10 @@ namespace front_end
             changeSite(Site.cnode);
         }
 
+        private void switch2Sina(object sender, RoutedEventArgs e) {
+            changeSite(Site.sina);
+        }
+
         private void changeSite(Site site) {
             vm.Site = site;
             vm.Page = 1;
@@ -86,6 +90,7 @@ namespace front_end
             tuicoolBtn.Background = trans;
             zhihuBtn.Background = trans;
             cnodeBtn.Background = trans;
+            sinaBtn.Background = trans;
             switch (site) {
                 case Site.zhihu:
                     zhihuBtn.Background = selected; break;
@@ -93,6 +98,8 @@ namespace front_end
                     tuicoolBtn.Background = selected; break;
                 case Site.cnode:
                     cnodeBtn.Background = selected; break;
+                case Site.sina:
+                    sinaBtn.Background = selected; break;
             }
             DB.updateSite(site);
             update();
