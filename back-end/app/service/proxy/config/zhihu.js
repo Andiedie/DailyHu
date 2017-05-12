@@ -30,8 +30,11 @@ module.exports = {
 
     return trimAll(res);
   },
+  extractHtml (data) {
+    return data.body;
+  },
   processArticle ($) {
-    $('head').append(`<title>${$('h2:first-child').text()}</title>`)
+    $('head').append(`<title>${$('h2:first-child').text()}</title>`);
 
     return $;
   }

@@ -21,8 +21,8 @@ const getDetail = async function (src) {
 
   let data = (await axios.get(src)).data;
 
-  if (siteConfig.type === 'json') {
-    data = data.body;
+  if (siteConfig.extractHtml) {
+    data = siteConfig.extractHtml(data);
   }
 
   const extracted = await extract(data, siteConfig.articleSelector, siteConfig.type === 'json');
