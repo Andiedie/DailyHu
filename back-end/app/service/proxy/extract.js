@@ -1,17 +1,22 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-/**
- * @param url
- * @return html of the extrated website
- */
-const extract = async (url, selector) => {
-  const html = (await axios.get(url)).data;
-  const $ = cheerio.load(html);
-
-  const main = $(selector);
-  $('body > *').remove();
-  $('body').append(main);
+const extract = async (html, selector, wrap = false) => {
+  let $;
+  if (wrap) {
+    $ = cheerio.load(`
+      <html>
+        <head></head>
+        <body></body>
+      </html>
+    `);
+    $('body').append(html);
+  } else {
+    $ = cheerio.load(html);
+    const main = $(selector);
+    $('body > *').remove();
+    $('body').append(main);
+  }
 
   $('script, link').remove();
 

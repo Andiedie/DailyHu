@@ -4,6 +4,7 @@ const url = require('url');
 const trimAll = require('../trimAll');
 
 module.exports = {
+  type: 'html',
   hostname: 'www.cnodejs.org',
   articleSelector: '#content > .panel:first-child',
   listItemSelector: '#topic_list .cell',
@@ -29,7 +30,7 @@ module.exports = {
     const topicWrapper = $('.topic_full_title');
     topicWrapper.children('span').remove();
     const topic = topicWrapper.text();
-    topicWrapper.replaceWith(`<h2>${topic}</h2>`)
+    topicWrapper.replaceWith(`<h2>${topic}</h2>`);
 
     return $;
   }
