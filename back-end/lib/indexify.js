@@ -4,26 +4,61 @@ const stack = require('callsite');
 
 module.exports = _config => {
   const result = {};
+  // TO-DO: 增加include以及重命名选项
   const config = {
     base: '.',
+    include: null,
     exclude: [],
     // priority: [],             // loading order, first to be loaded first
-    selfExclude: true,         // caller file is excluded by default
-    directory: true            // whether to load modules in direct sub-directory
+    selfExclude: true,           // caller file is excluded by default
+    directory: true,             // whether to load modules in direct sub-directory
+    merge: false                 // whether to merge all module
   };
   Object.assign(config, _config);
 
   const callerPath = path.resolve(stack()[1].getFileName());
   const source = path.resolve(callerPath, '..', config.base);
-  const files = fs.readdirSync(source);
+  let files = fs.readdirSync(source).map(filename => filename.replace(/\.js$/, ''));
+  config.exclude = config.exclude.map(filename => filename.replace(/\.js$/, ''));
+
+  const nameMap = new Map();
+  if (config.include) {
+    config.include.forEach(setting => {
+      if (setting instanceof Array) {
+        nameMap.set(setting[0].replace(/\.js$/, ''), setting[1]);
+      } else {
+        nameMap.set(setting.replace(/\.js$/, ''), setting);
+      }
+    });
+  } else {
+    files.forEach(filename => {
+      nameMap.set(filename, filename);
+    });
+  }
+
+  if (config.selfExclude) {
+    config.exclude.push(path.basename(callerPath, '.js'));
+  }
+  config.exclude.forEach(filename => {
+    nameMap.delete(filename);
+  });
+
   files
-    .map(filename => filename.replace(/\.js$/, ''))
     .filter(filename => config.directory || !fs.lstatSync(path.join(source, filename)).isDirectory())   // exclude
-    .filter(filename => !(config.selfExclude && filename === path.basename(callerPath, '.js')))         // self exclude
-    .filter(filename => config.exclude.indexOf(filename) === -1)                                        // directory exclude
     .forEach(filename => {
-      result[filename] = require(path.join(source, filename));
+      const name = nameMap.get(filename);
+      if (name) {
+        result[name] = require(path.join(source, filename));
+      }
     });
 
-  return result;
+  if (config.merge) {
+    const merged = {};
+    for (const value of Object.values(result)) {
+      Object.assign(merged, value);
+    }
+    return merged;
+  } else {
+    return result;
+  }
 };

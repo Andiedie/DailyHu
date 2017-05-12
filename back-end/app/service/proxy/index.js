@@ -1,9 +1,9 @@
-const getDetail = require('./detail');
-const getList = require('./list');
-const getMetadata = require('./meta');
+const indexify = require('../../../lib/indexify');
 
-module.exports = {
-  getDetail,
-  getList,
-  getMetadata
-};
+module.exports = indexify({
+  include: [
+    ['list.js', 'getList'],
+    ['meta.js', 'getMetadata'],
+    ['detail', 'getDetail']
+  ]
+});
