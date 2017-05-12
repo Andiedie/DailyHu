@@ -18,17 +18,8 @@ namespace front_end.ViewModel {
         public MainPageVM() {
             Articles = new ObservableCollection<Article>();
         }
-        public void updateArticles(List<Article> list) {
-            Articles.Clear();
-            list.ForEach(Articles.Add);
-        }
-        public void addArticles(List<Article> list) {
-            if (Articles.Last() is BottomProcessRing) {
-                Articles.RemoveAt(Articles.Count - 1);
-            }
-            list.ForEach(Articles.Add);
-        }
         public Site Site = Site.tuicool;
         public int Page = 1;
+        public Article current;
     }
 }

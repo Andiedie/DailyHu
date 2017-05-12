@@ -99,6 +99,7 @@
     <Compile Include="Model\ArticleListDataTemplateSelector.cs" />
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\BottomProcessRing.cs" />
+    <Compile Include="Model\DB.cs" />
     <Compile Include="Model\NoMore.cs" />
     <Compile Include="Model\Site.cs" />
     <Compile Include="Model\TemplateMatch.cs" />
@@ -116,7 +117,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Icon\cnode.jpg" />
-    <Content Include="Assets\Icon\tuicool.png" />
+    <Content Include="Assets\Icon\tuicool.jpg" />
+    <Content Include="Assets\share.png" />
     <Content Include="Assets\Icon\zhihu.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -137,7 +139,11 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="SQLite.UWP.2015, Version=3.18.0">
+      <Name>SQLite for Universal Windows Platform</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

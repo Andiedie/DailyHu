@@ -51,13 +51,13 @@
                DisplayMode="CompactOverlay">
         <SplitView.Pane>
             <StackPanel>
-                <Button Background="Transparent" Width="48" Height="48" Click="switch2Tuicool">
-                    <Image Source="../Assets/Icon/tuicool.png" Width="25"/>
+                <Button x:Name="tuicoolBtn" Background="Transparent" Width="48" Height="48" Click="switch2Tuicool">
+                    <Image Source="../Assets/Icon/tuicool.jpg" Width="25"/>
                 </Button>
-                <Button Background="Transparent" Width="48" Height="48" Click="switch2Cnode">
+                <Button x:Name="cnodeBtn" Background="Transparent" Width="48" Height="48" Click="switch2Cnode">
                     <Image Source="../Assets/Icon/cnode.jpg" Width="25"/>
                 </Button>
-                <Button Background="Transparent" Width="48" Height="48" Click="switch2Zhihu">
+                <Button x:Name="zhihuBtn" Background="Transparent" Width="48" Height="48" Click="switch2Zhihu">
                     <Image Source="../Assets/Icon/zhihu.jpg" Width="25"/>
                 </Button>
             </StackPanel>
@@ -88,7 +88,21 @@
                 </ListView>
             </ScrollViewer>
             <Grid Grid.Column="1" Padding="20">
-                <WebView x:Name="webview"/>
+                <WebView x:Name="webview" ContentLoading="contentLoading" DOMContentLoaded="contentLoaded"/>
+                <Grid Background="#f2f2f2" x:Name="webLoadRing" Visibility="Collapsed">
+                    <ProgressRing IsActive="True"
+                                  Width="80"
+                                  Height="80"/>
+                </Grid>
+                <Button VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        Margin="0,0,10,10"
+                        Click="share">
+                    <Image Source="../Assets/share.png"
+                           Width="30"
+                           Height="30"/>
+                </Button>
             </Grid>
         </Grid>
     </SplitView>
