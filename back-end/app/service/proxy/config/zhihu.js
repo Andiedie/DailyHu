@@ -31,10 +31,7 @@ module.exports = {
     return trimAll(res);
   },
   processArticle ($) {
-    $('h1').each((index, h1) => {
-      const $h1 = $(h1);
-      $h1.replaceWith(`<h2>${$h1.text()}</h2>`);
-    });
+    $('head').append(`<title>${$('h2:first-child').text()}</title>`)
 
     return $;
   }
