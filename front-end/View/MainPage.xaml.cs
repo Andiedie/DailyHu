@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace front_end
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private MainPageVM vm;
+        private MainPageVM vm = new MainPageVM();
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,7 +44,21 @@ namespace front_end
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
             string json = reader.ReadToEnd();
             var articles = JsonConvert.DeserializeObject<List<Article>>(json);
-            vm = new MainPageVM(articles);
+            vm.updateArticles(articles);
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selected = e.AddedItems.First() as Article;
+            webview.Source = new Uri(selected.Url);
+        }
+
+        private void ToBottom(object sender, ScrollViewerViewChangedEventArgs e) {
+            var scrollViewer = sender as ScrollViewer;
+            var verticalOffset = scrollViewer.VerticalOffset;
+            var maxVerticalOffset = scrollViewer.ScrollableHeight;
+            if (maxVerticalOffset < 0 || verticalOffset == maxVerticalOffset) {
+                // progressBar.Visibility = Visibility.Visible;
+            }
         }
     }
 }

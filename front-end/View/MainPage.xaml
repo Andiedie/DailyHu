@@ -5,17 +5,21 @@
     xmlns:local="using:front_end"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:model="using:front_end.Model">
 
     <SplitView IsPaneOpen="False"
                DisplayMode="CompactOverlay">
         <SplitView.Pane>
             <StackPanel>
                 <Button Background="Transparent" Width="48" Height="48">
-                    <Image Source="Assets/Icon/tuicool.png" Width="25"/>
+                    <Image Source="../Assets/Icon/tuicool.png" Width="25"/>
                 </Button>
                 <Button Background="Transparent" Width="48" Height="48">
-                    <Image Source="Assets/Icon/cnode.jpg" Width="25"/>
+                    <Image Source="../Assets/Icon/cnode.jpg" Width="25"/>
+                </Button>
+                <Button Background="Transparent" Width="48" Height="48">
+                    <Image Source="../Assets/Icon/zhihu.jpg" Width="25"/>
                 </Button>
             </StackPanel>
         </SplitView.Pane>
@@ -24,11 +28,43 @@
                 <ColumnDefinition Width="*" MaxWidth="500"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <ListView>
-                
-            </ListView>
+            <ScrollViewer ViewChanged="ToBottom">
+                <ListView x:Name="articleList" ItemsSource="{x:Bind vm.Articles, Mode=OneWay}"
+                      SelectionMode="Single"
+                      SelectionChanged="ListView_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Article">
+                            <UserControl>
+                                <StackPanel Height="80"
+                                        Orientation="Horizontal"
+                                        Margin="5"
+                                        ToolTipService.ToolTip="{x:Bind Title}">
+                                    <Image Source="{x:Bind Thumbnail}"
+                                       Width="70"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,10,0"/>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Bind Date}"
+                                               VerticalAlignment="Center"
+                                               Foreground="Gray"
+                                               FontSize="14"/>
+                                        <TextBlock Text="{x:Bind Title}"
+                                               VerticalAlignment="Center"
+                                               FontSize="20"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </UserControl>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
             <Grid Grid.Column="1" Padding="20">
-                <WebView Source="http://localhost:8008/detail?url=http://www.tuicool.com/articles/NveueuY"/>
+                <WebView x:Name="webview"/>
             </Grid>
         </Grid>
     </SplitView>
