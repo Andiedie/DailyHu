@@ -4,6 +4,7 @@ const url = require('url');
 const trimAll = require('../trimAll');
 
 module.exports = {
+  type: 'html',
   hostname: 'www.tuicool.com',
   articleSelector: '.article_detail_bg > h1, .article_body',
   listItemSelector: '.list_article_item',
