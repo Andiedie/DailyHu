@@ -4,6 +4,7 @@ const router = new Router();
 
 router
   .get('/list', controllers.list)
-  .get('/detail', controllers.detail);
+  .get('/detail', controllers.detail)
+  .get('/meta', controllers.meta);
 
 module.exports = router;
