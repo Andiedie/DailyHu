@@ -7,6 +7,35 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:model="using:front_end.Model">
+    <Page.Resources>
+        <DataTemplate x:Key="ArticleDataTemplate" x:DataType="model:Article">
+            <UserControl>
+                <StackPanel Height="80"
+                            Orientation="Horizontal"
+                            Margin="5"
+                            ToolTipService.ToolTip="{x:Bind Title}">
+                    <Image Source="{x:Bind Thumbnail}"
+                           Width="70"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{x:Bind Date}"
+                                   VerticalAlignment="Center"
+                                   Foreground="Gray"
+                                   FontSize="14"/>
+                        <TextBlock Text="{x:Bind Title}"
+                                   VerticalAlignment="Center"
+                                   FontSize="20"/>
+                    </StackPanel>
+                </StackPanel>
+            </UserControl>
+        </DataTemplate>
+        <DataTemplate x:Key="ProcessRingDataTemplate">
+            <ProgressRing IsActive="True"
+                          Width="30"
+                          Height="30"/>
+        </DataTemplate>
+    </Page.Resources>
 
     <SplitView IsPaneOpen="False"
                DisplayMode="CompactOverlay">
@@ -30,37 +59,21 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer ViewChanged="ToBottom">
                 <ListView x:Name="articleList" ItemsSource="{x:Bind vm.Articles, Mode=OneWay}"
-                      SelectionMode="Single"
-                      SelectionChanged="ListView_SelectionChanged">
+                          SelectionMode="Single"
+                          SelectionChanged="ListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Article">
-                            <UserControl>
-                                <StackPanel Height="80"
-                                        Orientation="Horizontal"
-                                        Margin="5"
-                                        ToolTipService.ToolTip="{x:Bind Title}">
-                                    <Image Source="{x:Bind Thumbnail}"
-                                       Width="70"
-                                       VerticalAlignment="Center"
-                                       Margin="0,0,10,0"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Bind Date}"
-                                               VerticalAlignment="Center"
-                                               Foreground="Gray"
-                                               FontSize="14"/>
-                                        <TextBlock Text="{x:Bind Title}"
-                                               VerticalAlignment="Center"
-                                               FontSize="20"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </UserControl>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    <ListView.ItemTemplateSelector>
+                        <model:ArticleListDataTemplateSelector>
+                            <model:ArticleListDataTemplateSelector.Matches>
+                                <model:TemplateMatch TargetType="front_end.Model.Article" Template="{StaticResource ArticleDataTemplate}" />
+                                <model:TemplateMatch TargetType="front_end.Model.BottomProcessRing" Template="{StaticResource ProcessRingDataTemplate}" />
+                            </model:ArticleListDataTemplateSelector.Matches>
+                        </model:ArticleListDataTemplateSelector>
+                    </ListView.ItemTemplateSelector>
                 </ListView>
             </ScrollViewer>
             <Grid Grid.Column="1" Padding="20">

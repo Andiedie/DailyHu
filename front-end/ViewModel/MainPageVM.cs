@@ -19,7 +19,10 @@ namespace front_end.ViewModel {
             Articles = new ObservableCollection<Article>();
         }
         public void updateArticles(List<Article> list) {
+            if (Articles.Count > 0)
+                Articles.RemoveAt(Articles.Count - 1);
             list.ForEach(Articles.Add);
+            Articles.Add(new BottomProcessRing());
         }
     }
 }

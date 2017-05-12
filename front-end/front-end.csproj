@@ -96,7 +96,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\ArticleListDataTemplateSelector.cs" />
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\BottomProcessRing.cs" />
+    <Compile Include="Model\TemplateMatch.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
