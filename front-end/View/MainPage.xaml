@@ -31,9 +31,19 @@
             </UserControl>
         </DataTemplate>
         <DataTemplate x:Key="ProcessRingDataTemplate">
-            <ProgressRing IsActive="True"
-                          Width="30"
-                          Height="30"/>
+            <Grid Height="80">
+                <ProgressRing IsActive="True"
+                              Width="50"
+                              Height="50"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="NoMoreDataTemplate">
+            <Grid Height="80">
+                <TextBlock Text="已经到底啦"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="20"/>
+            </Grid>
         </DataTemplate>
     </Page.Resources>
 
@@ -41,13 +51,13 @@
                DisplayMode="CompactOverlay">
         <SplitView.Pane>
             <StackPanel>
-                <Button Background="Transparent" Width="48" Height="48">
+                <Button Background="Transparent" Width="48" Height="48" Click="switch2Tuicool">
                     <Image Source="../Assets/Icon/tuicool.png" Width="25"/>
                 </Button>
-                <Button Background="Transparent" Width="48" Height="48">
+                <Button Background="Transparent" Width="48" Height="48" Click="switch2Cnode">
                     <Image Source="../Assets/Icon/cnode.jpg" Width="25"/>
                 </Button>
-                <Button Background="Transparent" Width="48" Height="48">
+                <Button Background="Transparent" Width="48" Height="48" Click="switch2Zhihu">
                     <Image Source="../Assets/Icon/zhihu.jpg" Width="25"/>
                 </Button>
             </StackPanel>
@@ -57,7 +67,7 @@
                 <ColumnDefinition Width="*" MaxWidth="500"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer ViewChanged="ToBottom">
+            <ScrollViewer x:Name="articlesScroll" ViewChanged="ToBottom">
                 <ListView x:Name="articleList" ItemsSource="{x:Bind vm.Articles, Mode=OneWay}"
                           SelectionMode="Single"
                           SelectionChanged="ListView_SelectionChanged">
@@ -71,6 +81,7 @@
                             <model:ArticleListDataTemplateSelector.Matches>
                                 <model:TemplateMatch TargetType="front_end.Model.Article" Template="{StaticResource ArticleDataTemplate}" />
                                 <model:TemplateMatch TargetType="front_end.Model.BottomProcessRing" Template="{StaticResource ProcessRingDataTemplate}" />
+                                <model:TemplateMatch TargetType="front_end.Model.NoMore" Template="{StaticResource NoMoreDataTemplate}" />
                             </model:ArticleListDataTemplateSelector.Matches>
                         </model:ArticleListDataTemplateSelector>
                     </ListView.ItemTemplateSelector>

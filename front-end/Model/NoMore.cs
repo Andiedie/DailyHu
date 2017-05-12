@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace front_end.Model {
-    class BottomProcessRing : Article {
+    class NoMore : Article {
     }
 }

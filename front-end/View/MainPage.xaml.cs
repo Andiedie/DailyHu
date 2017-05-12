@@ -34,17 +34,7 @@ namespace front_end
         public MainPage()
         {
             this.InitializeComponent();
-            init();
-        }
-        public async void init() {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://localhost:8008/list?site=tuicool&page=1");
-            request.Method = "GET";
-            HttpWebResponse response = (HttpWebResponse) await request.GetResponseAsync();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-            string json = reader.ReadToEnd();
-            var articles = JsonConvert.DeserializeObject<List<Article>>(json);
-            vm.updateArticles(articles);
+            update();
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -52,13 +42,39 @@ namespace front_end
             webview.Source = new Uri(selected.Url);
         }
 
-        private void ToBottom(object sender, ScrollViewerViewChangedEventArgs e) {
-            var scrollViewer = sender as ScrollViewer;
-            var verticalOffset = scrollViewer.VerticalOffset;
-            var maxVerticalOffset = scrollViewer.ScrollableHeight;
+        private async void ToBottom(object sender, ScrollViewerViewChangedEventArgs e) {
+            var verticalOffset = articlesScroll.VerticalOffset;
+            var maxVerticalOffset = articlesScroll.ScrollableHeight;
             if (maxVerticalOffset < 0 || verticalOffset == maxVerticalOffset) {
-                // progressBar.Visibility = Visibility.Visible;
+                if (!(vm.Articles.Last() is BottomProcessRing)) {
+                    vm.Articles.Add(new BottomProcessRing());
+                    vm.Page++;
+                    vm.addArticles(await Article.getArticles(vm.Site, vm.Page));
+                }
             }
+        }
+
+        private void switch2Tuicool(object sender, RoutedEventArgs e) {
+            vm.Site = Site.tuicool;
+            vm.Page = 1;
+            update();
+        }
+
+        private void switch2Zhihu(object sender, RoutedEventArgs e) {
+            vm.Site = Site.zhihu;
+            vm.Page = 1;
+            update();
+        }
+
+        private void switch2Cnode(object sender, RoutedEventArgs e) {
+            vm.Site = Site.cnode;
+            vm.Page = 1;
+            update();
+        }
+
+        private async void update() {
+            vm.updateArticles(await Article.getArticles(vm.Site, vm.Page));
+            articlesScroll.ChangeView(null, 0, null);
         }
     }
 }

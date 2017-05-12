@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace front_end.Model {
     public class Article : BindableBase {
@@ -38,5 +41,22 @@ namespace front_end.Model {
         }
 
         public Article() {}
+
+        public static async Task<List<Article>> getArticles(Site site, int page) {
+            try {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://localhost:8008/list?site={site}&page={page}");
+                request.Method = "GET";
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string json = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<List<Article>>(json);
+            }
+            catch (Exception) {
+                var ans = new List<Article>();
+                ans.Add(new NoMore());
+                return ans;
+            }
+        }
     }
 }

@@ -99,6 +99,8 @@
     <Compile Include="Model\ArticleListDataTemplateSelector.cs" />
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\BottomProcessRing.cs" />
+    <Compile Include="Model\NoMore.cs" />
+    <Compile Include="Model\Site.cs" />
     <Compile Include="Model\TemplateMatch.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="View\MainPage.xaml.cs">
