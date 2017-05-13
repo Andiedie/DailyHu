@@ -90,7 +90,7 @@
                     </ListView.ItemTemplateSelector>
                 </ListView>
             </ScrollViewer>
-            <Grid Grid.Column="1" Padding="20">
+            <Grid Grid.Column="1" Padding="20,20,0,20" Background="White">
                 <WebView x:Name="webview" ContentLoading="contentLoading" DOMContentLoaded="contentLoaded"/>
                 <Grid Background="#f2f2f2" x:Name="webLoadRing" Visibility="Collapsed">
                     <ProgressRing IsActive="True"
@@ -99,8 +99,8 @@
                 </Grid>
                 <Button VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
-                        Background="Transparent"
-                        Margin="0,0,10,10"
+                        Background="#4C80397B"
+                        Margin="0,0,10,0"
                         Click="share">
                     <Image Source="../Assets/share.png"
                            Width="30"

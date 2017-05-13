@@ -61,7 +61,8 @@ namespace front_end
                     vm.Page++;
                     var list = await Article.getArticles(vm.Site, vm.Page);
                     vm.Articles.Remove(vm.Articles.Last());
-                    list.ForEach(vm.Articles.Add);
+                    if (!(vm.Articles.Last() is NoMore))
+                        list.ForEach(vm.Articles.Add);
                 }
             }
         }
@@ -109,6 +110,10 @@ namespace front_end
             vm.Articles.Clear();
             vm.Articles.Add(new BottomProcessRing());
             var list = await Article.getArticles(vm.Site, vm.Page);
+            while (list.Count < 20) {
+                vm.Page++;
+                (await Article.getArticles(vm.Site, vm.Page)).ForEach(list.Add);
+            }
             list.ForEach(vm.Articles.Add);
             vm.Articles.Remove(vm.Articles.First());
             articlesScroll.ChangeView(null, 0, null);
