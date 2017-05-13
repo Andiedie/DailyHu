@@ -4,9 +4,10 @@ const url = require('url');
 const trimAll = require('../trimAll');
 const moment = require('moment');
 
-module.exports = {
-  type: 'json',
-  hostname: 'news.sina.cn',
+const config = {
+  listType: 'json',
+  detailType: 'html',
+  hostname: [],
   articleSelector: '.art_main_card',
   maximumPage: 1000,
   listUrl (pageNum) {
@@ -20,6 +21,11 @@ module.exports = {
 
     res.thumbnail = item.img;
     res.title = item.title;
+
+    if (config.hostname.indexOf(url.parse(item.link).hostname) === -1) {
+      return null;
+    }
+
     res.url = `${globalConfig.hostname}/detail?url=${item.link}`;
     res.date = item.date;
 
@@ -30,6 +36,15 @@ module.exports = {
     $('body > *').remove();
     $('body').append(keep);
 
+    // TO-DO: check whether is empty
+
     return $;
   }
 };
+
+['news', 'k', 'mil', 'ent', 'sports', 'finance', 'tech', 'zx']
+  .forEach(prefix => {
+    config.hostname.push(`${prefix}.sina.cn`);
+  });
+
+module.exports = config;

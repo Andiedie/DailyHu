@@ -2,6 +2,7 @@ const config = require('./config');
 const axios = require('axios');
 const assert = require('assert');
 const cheerio = require('cheerio');
+const _ = require('lodash');
 
 const processHtml = (siteConfig, html) => {
   const $ = cheerio.load(html);
@@ -10,13 +11,12 @@ const processHtml = (siteConfig, html) => {
   $(siteConfig.listItemSelector).each((index, listItem) => {
     res.push(siteConfig.processListItem(listItem));
   });
-
-  return res;
+  return _.compact(res);
 };
 
 const processJson = (siteConfig, data) => {
   const list = siteConfig.processList(data);
-  return list.map(siteConfig.processListItem);
+  return _.chain(list).map(siteConfig.processListItem).compact().value();
 };
 
 const getList = async function (site, pageNum) {
@@ -26,7 +26,7 @@ const getList = async function (site, pageNum) {
   assert(pageNum <= siteConfig.maximumPage, 'page number exceeded.');
   const data = (await axios.get(siteConfig.listUrl(pageNum))).data;
 
-  switch (siteConfig.type) {
+  switch (siteConfig.listType) {
     case 'html':
       return processHtml(siteConfig, data);
     case 'json':

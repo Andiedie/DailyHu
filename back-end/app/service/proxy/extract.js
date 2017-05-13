@@ -1,9 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const extract = async (html, selector, wrap = false) => {
-  let $;
-  if (wrap) {
+const extract = async (html, selector) => {
+  let $ = cheerio.load(html);
+  if ($('body').length === 0) {
+    // need to be wrapped
     $ = cheerio.load(`
       <html>
         <head></head>
@@ -11,13 +12,12 @@ const extract = async (html, selector, wrap = false) => {
       </html>
     `);
     $('body').append(html);
-  } else {
-    $ = cheerio.load(html);
+  }
+  if (selector) {
     const main = $(selector);
     $('body > *').remove();
     $('body').append(main);
   }
-
   $('script, link').remove();
 
   // 基于腾讯云对象存储加速的基础css

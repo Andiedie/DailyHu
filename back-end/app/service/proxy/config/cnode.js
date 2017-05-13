@@ -4,7 +4,8 @@ const url = require('url');
 const trimAll = require('../trimAll');
 
 module.exports = {
-  type: 'html',
+  listType: 'html',
+  detailType: 'html',
   hostname: 'www.cnodejs.org',
   articleSelector: '#content > .panel:first-child',
   listItemSelector: '#topic_list .cell',

@@ -5,9 +5,9 @@ const trimAll = require('../trimAll');
 const moment = require('moment');
 
 module.exports = {
-  type: 'json',
+  listType: 'json',
+  detailType: 'json',
   hostname: 'news-at.zhihu.com',
-  articleSelector: '',
   maximumPage: 1000,
   listUrl (pageNum) {
     return `http://news-at.zhihu.com/api/4/news/before/${moment().add(2 - pageNum, 'day').format('YYYYMMDD')}`;
