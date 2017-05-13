@@ -120,6 +120,8 @@
                         HorizontalAlignment="Right"
                         Background="Transparent"
                         Margin="0,0,10,0"
+                        x:Name="shareBtn"
+                        Visibility="Collapsed"
                         Click="share">
                     <Image Source="../Assets/share.png"
                            Width="30"

@@ -57,6 +57,7 @@ namespace front_end
                 vm.current = selected;
                 webview.Source = new Uri(selected.Url);
                 webLoadRing.Visibility = Visibility.Visible;
+                shareBtn.Visibility = Visibility.Visible;
             }
         }
 
