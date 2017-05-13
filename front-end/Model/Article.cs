@@ -24,7 +24,7 @@ namespace front_end.Model {
             get { return thumbnail; }
             set {
                 if (value == "")
-                    value = @"ms-appx:///Assets/LockScreenLogo.scale-200.png";
+                    value = "ms-appx:///Assets/StoreLogo.scale-100.png";
                 SetProperty(ref thumbnail, value);
             }
         }

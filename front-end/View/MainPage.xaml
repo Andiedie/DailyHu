@@ -91,15 +91,15 @@
                 </ListView>
             </ScrollViewer>
             <Grid Grid.Column="1" Padding="20,20,0,20" Background="White">
-                <WebView x:Name="webview" ContentLoading="contentLoading" DOMContentLoaded="contentLoaded"/>
-                <Grid Background="#f2f2f2" x:Name="webLoadRing" Visibility="Collapsed">
+                <WebView x:Name="webview" DOMContentLoaded="contentLoaded"/>
+                <Grid Background="White" x:Name="webLoadRing" Visibility="Collapsed">
                     <ProgressRing IsActive="True"
                                   Width="80"
                                   Height="80"/>
                 </Grid>
                 <Button VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
-                        Background="#4C80397B"
+                        Background="Transparent"
                         Margin="0,0,10,0"
                         Click="share">
                     <Image Source="../Assets/share.png"

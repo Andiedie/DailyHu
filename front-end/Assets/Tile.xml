@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tile>
+  <visual>
+
+    <binding template="TileSmall">
+      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+    </binding>
+
+    <binding template="TileMedium">
+      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+    </binding>
+
+    <binding template="TileWide">
+      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+    </binding>
+
+    <binding template="TileLarge">
+      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+    </binding>
+
+  </visual>
+</tile>

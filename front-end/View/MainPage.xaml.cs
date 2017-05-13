@@ -12,10 +12,13 @@ using front_end.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Streams;
 using Windows.UI;
+using Windows.UI.Notifications;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,6 +39,10 @@ namespace front_end
         private MainPageVM vm = new MainPageVM();
         public MainPage()  {
             this.InitializeComponent();
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.BackgroundColor = Color.FromArgb(255, 128, 57, 173);
+            titleBar.ButtonBackgroundColor = Color.FromArgb(255, 128, 57, 173);
+            webview.Source = new Uri("ms-appx-web:///Assets/index.html");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -49,6 +56,7 @@ namespace front_end
             if (selected != null && selected.Title != null) {
                 vm.current = selected;
                 webview.Source = new Uri(selected.Url);
+                webLoadRing.Visibility = Visibility.Visible;
             }
         }
 
@@ -87,7 +95,7 @@ namespace front_end
             vm.Site = site;
             vm.Page = 1;
             var trans = new SolidColorBrush(Colors.Transparent);
-            var selected = new SolidColorBrush(Colors.Gray);
+            var selected = new SolidColorBrush(Color.FromArgb(76,128,57,123));
             tuicoolBtn.Background = trans;
             zhihuBtn.Background = trans;
             cnodeBtn.Background = trans;
@@ -131,10 +139,6 @@ namespace front_end
             var deferral = args.Request.GetDeferral();
             dp.SetBitmap(RandomAccessStreamReference.CreateFromUri(new Uri(vm.current.Thumbnail)));
             deferral.Complete();
-        }
-
-        private void contentLoading(WebView sender, WebViewContentLoadingEventArgs args) {
-            webLoadRing.Visibility = Visibility.Visible;
         }
 
         private void contentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args) {
