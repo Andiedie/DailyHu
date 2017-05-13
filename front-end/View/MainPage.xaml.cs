@@ -43,6 +43,7 @@ namespace front_end
             titleBar.BackgroundColor = Color.FromArgb(255, 128, 57, 173);
             titleBar.ButtonBackgroundColor = Color.FromArgb(255, 128, 57, 173);
             webview.Source = new Uri("ms-appx-web:///Assets/index.html");
+            TileController.run();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {

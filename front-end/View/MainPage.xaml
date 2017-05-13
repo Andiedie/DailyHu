@@ -65,69 +65,71 @@
                 </Button>
             </StackPanel>
         </SplitView.Pane>
-        <Grid Background="WhiteSmoke">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup>
-                    <VisualState x:Name="Min1">
-                        <VisualState.Setters>
-                            <!--<Setter Target="articlesScroll.(Grid.ColumnSpan)" Value="2" />-->
-                            <Setter Target="webViewContainer.Visibility" Value="Collapsed" />
-                        </VisualState.Setters>
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="1" />
-                        </VisualState.StateTriggers>
-                    </VisualState>
-                    <VisualState x:Name="Min1000">
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="1000" />
-                        </VisualState.StateTriggers>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
+        <UserControl>
+            <Grid Background="WhiteSmoke">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Narrow">
+                            <VisualState.Setters>
+                                <Setter Target="articlesScroll.(Grid.ColumnSpan)" Value="2" />
+                                <Setter Target="webViewContainer.Visibility" Value="Collapsed" />
+                            </VisualState.Setters>
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                        </VisualState>
+                        <VisualState x:Name="Wide">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="720" />
+                            </VisualState.StateTriggers>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MaxWidth="500"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <ScrollViewer x:Name="articlesScroll" ViewChanged="ToBottom">
-                <ListView x:Name="articleList" ItemsSource="{x:Bind vm.Articles, Mode=OneWay}"
-                          SelectionMode="Single"
-                          SelectionChanged="ListView_SelectionChanged">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplateSelector>
-                        <model:ArticleListDataTemplateSelector>
-                            <model:ArticleListDataTemplateSelector.Matches>
-                                <model:TemplateMatch TargetType="front_end.Model.Article" Template="{StaticResource ArticleDataTemplate}" />
-                                <model:TemplateMatch TargetType="front_end.Model.BottomProcessRing" Template="{StaticResource ProcessRingDataTemplate}" />
-                                <model:TemplateMatch TargetType="front_end.Model.NoMore" Template="{StaticResource NoMoreDataTemplate}" />
-                            </model:ArticleListDataTemplateSelector.Matches>
-                        </model:ArticleListDataTemplateSelector>
-                    </ListView.ItemTemplateSelector>
-                </ListView>
-            </ScrollViewer>
-            <Grid x:Name="webViewContainer" Grid.Column="1" Padding="20,20,0,20" Background="White">
-                <WebView x:Name="webview" DOMContentLoaded="contentLoaded"/>
-                <Grid Background="White" x:Name="webLoadRing" Visibility="Collapsed">
-                    <ProgressRing IsActive="True"
-                                  Width="80"
-                                  Height="80"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="500"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer x:Name="articlesScroll" ViewChanged="ToBottom">
+                    <ListView x:Name="articleList" ItemsSource="{x:Bind vm.Articles, Mode=OneWay}"
+                              SelectionMode="Single"
+                              SelectionChanged="ListView_SelectionChanged">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplateSelector>
+                            <model:ArticleListDataTemplateSelector>
+                                <model:ArticleListDataTemplateSelector.Matches>
+                                    <model:TemplateMatch TargetType="front_end.Model.Article" Template="{StaticResource ArticleDataTemplate}" />
+                                    <model:TemplateMatch TargetType="front_end.Model.BottomProcessRing" Template="{StaticResource ProcessRingDataTemplate}" />
+                                    <model:TemplateMatch TargetType="front_end.Model.NoMore" Template="{StaticResource NoMoreDataTemplate}" />
+                                </model:ArticleListDataTemplateSelector.Matches>
+                            </model:ArticleListDataTemplateSelector>
+                        </ListView.ItemTemplateSelector>
+                    </ListView>
+                </ScrollViewer>
+                <Grid x:Name="webViewContainer" Grid.Column="1" Padding="20,20,0,20" Background="White">
+                    <WebView x:Name="webview" DOMContentLoaded="contentLoaded"/>
+                    <Grid Background="White" x:Name="webLoadRing" Visibility="Collapsed">
+                        <ProgressRing IsActive="True"
+                                      Width="80"
+                                      Height="80"/>
+                    </Grid>
+                    <Button VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            Margin="0,0,10,0"
+                            x:Name="shareBtn"
+                            Visibility="Collapsed"
+                            Click="share">
+                        <Image Source="../Assets/share.png"
+                               Width="30"
+                               Height="30"/>
+                    </Button>
                 </Grid>
-                <Button VerticalAlignment="Bottom"
-                        HorizontalAlignment="Right"
-                        Background="Transparent"
-                        Margin="0,0,10,0"
-                        x:Name="shareBtn"
-                        Visibility="Collapsed"
-                        Click="share">
-                    <Image Source="../Assets/share.png"
-                           Width="30"
-                           Height="30"/>
-                </Button>
             </Grid>
-        </Grid>
+        </UserControl>
     </SplitView>
 </Page>

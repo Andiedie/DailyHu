@@ -1,21 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <tile>
   <visual>
-
     <binding template="TileSmall">
-      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+      <image src="Assets/Square44x44Logo.scale-200.png" placement="background"/>
     </binding>
 
     <binding template="TileMedium">
-      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+      <image src="Assets/Square71x71Logo.scale-200.png" placement="background"/>
     </binding>
 
     <binding template="TileWide">
-      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+      <image src="Assets/Wide310x150Logo.scale-200.png" placement="background"/>
     </binding>
 
     <binding template="TileLarge">
-      <image src="Assets/Icon/zhihu.jpg" placement="background"/>
+      <image src="Assets/Square310x310Logo.scale-200.png" placement="background"/>
     </binding>
 
   </visual>
