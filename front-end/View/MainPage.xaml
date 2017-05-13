@@ -70,7 +70,7 @@
                 <VisualStateGroup>
                     <VisualState x:Name="Min1">
                         <VisualState.Setters>
-                            <Setter Target="articlesScroll.(Grid.ColumnSpan)" Value="2" />
+                            <!--<Setter Target="articlesScroll.(Grid.ColumnSpan)" Value="2" />-->
                             <Setter Target="webViewContainer.Visibility" Value="Collapsed" />
                         </VisualState.Setters>
                         <VisualState.StateTriggers>
