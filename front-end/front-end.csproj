@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="Assets\particles-js\particles.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +122,7 @@
     <Content Include="Assets\Icon\sina.jpg" />
     <Content Include="Assets\Icon\tuicool.jpg" />
     <Content Include="Assets\index.html" />
+    <Content Include="Assets\particles-js\particles.min.js" />
     <Content Include="Assets\share.png" />
     <Content Include="Assets\Icon\zhihu.jpg" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

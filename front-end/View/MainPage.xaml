@@ -66,6 +66,25 @@
             </StackPanel>
         </SplitView.Pane>
         <Grid Background="WhiteSmoke">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="Min1">
+                        <VisualState.Setters>
+                            <Setter Target="articlesScroll.(Grid.ColumnSpan)" Value="2" />
+                            <Setter Target="webViewContainer.Visibility" Value="Collapsed" />
+                        </VisualState.Setters>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1" />
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState x:Name="Min1000">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1000" />
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MaxWidth="500"/>
                 <ColumnDefinition Width="2*"/>
@@ -90,7 +109,7 @@
                     </ListView.ItemTemplateSelector>
                 </ListView>
             </ScrollViewer>
-            <Grid Grid.Column="1" Padding="20,20,0,20" Background="White">
+            <Grid x:Name="webViewContainer" Grid.Column="1" Padding="20,20,0,20" Background="White">
                 <WebView x:Name="webview" DOMContentLoaded="contentLoaded"/>
                 <Grid Background="White" x:Name="webLoadRing" Visibility="Collapsed">
                     <ProgressRing IsActive="True"
