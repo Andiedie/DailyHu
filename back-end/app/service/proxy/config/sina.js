@@ -32,8 +32,8 @@ const config = {
     return trimAll(res);
   },
   processArticle ($) {
-    const keep = $('.art_title_h1, .art_t, .img_wrapper');
-    $('body > *').remove();
+    const keep = $('.art_title_h1, .art_t, .img_wrapper, .art_pic_card');
+    $('body').empty();
     $('body').append(keep);
 
     // TO-DO: check whether is empty
