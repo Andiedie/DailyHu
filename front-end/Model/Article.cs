@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace front_end.Model {
+    // 文章
     public class Article : BindableBase {
         private string date;
         private string thumbnail;
@@ -23,6 +24,7 @@ namespace front_end.Model {
         public string Thumbnail {
             get { return thumbnail; }
             set {
+                // 设置默认图片
                 if (value == "")
                     value = "ms-appx:///Assets/StoreLogo.scale-100.png";
                 SetProperty(ref thumbnail, value);
@@ -46,6 +48,7 @@ namespace front_end.Model {
 
         public Article() {}
 
+        // 从服务器获取文章列表
         public static async Task<List<Article>> getArticles(Site site, int page) {
             try {
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://andiedie.cc:8008/list?site={site.Name}&page={page}");

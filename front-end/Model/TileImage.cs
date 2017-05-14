@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace front_end.Model {
+    // 动态磁贴图片
     public class TileImage {
         public string Large { get; set; }
         public string Medium { get; set; }

@@ -12,8 +12,9 @@ using Windows.Storage;
 using Windows.UI.Notifications;
 
 namespace front_end.Model {
+    // 用于更新动态磁贴
     public static class TileController {
-        public async static void run(List<Site> sites) {
+        public static void run(List<Site> sites) {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(File.ReadAllText("Assets/Tile.xml"));
             TileUpdater updater = TileUpdateManager.CreateTileUpdaterForApplication();

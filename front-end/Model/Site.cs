@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace front_end.Model {
+    // 数据源
     public class Site {
         public string Name { set; get; }
         public string Icon { set; get; }
@@ -18,6 +19,7 @@ namespace front_end.Model {
             TileImage = t;
         }
         public Site() { }
+        // 从服务器获取数据源，如果失败则从数据库获取缓存
         public static async Task<List<Site>> getSites() {
             try {
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://andiedie.cc:8008/meta");

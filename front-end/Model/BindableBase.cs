@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace front_end.Model {
+    // 用于简化INotifyPropertyChanged接口的使用
     abstract public class BindableBase : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 

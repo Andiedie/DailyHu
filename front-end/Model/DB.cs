@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SQLitePCL;
 
 namespace front_end.Model {
+    // 数据库：用于存储数据源，当从服务器获取数据源失败时从数据库载入
     public static class DB {
         private static SQLiteConnection connection = new SQLiteConnection("ribaohu.db");
         static DB() {

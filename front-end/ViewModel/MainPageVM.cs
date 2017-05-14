@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using front_end.Model;
 
 namespace front_end.ViewModel {
+    // 主页面的ViewModel
     class MainPageVM : BindableBase {
         public Site Site { get; set; }
         public int Page { get; set; }
