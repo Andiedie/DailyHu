@@ -1,3 +1,3 @@
 module.exports = {
-  hostname: 'http://www.andiedie.cn:8008',
+  hostname: 'http://www.andiedie.cc:8008',
 };
