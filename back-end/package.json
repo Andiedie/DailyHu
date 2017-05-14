@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/nodemon index.js",
-    "start": "node index.js"
+    "dev": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js"
   },
   "author": "Chu Zhu, Changan Zhou, Mingjie Zhu",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "axios": "^0.16.1",
     "callsite": "^1.0.0",
     "cheerio": "^0.22.0",
+    "cross-env": "^5.0.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.1.1",
