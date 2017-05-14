@@ -32,6 +32,9 @@ const extract = async (html, selector) => {
   // 屏蔽页面跳转
   // $('a').removeAttr('href').removeAttr('target').removeAttr('rel');
 
+  // 强制所有页面跳转都在浏览器中进行
+  $('a').attr('target', '_blank');
+
   return $;
 };
 
