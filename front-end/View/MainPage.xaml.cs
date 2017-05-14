@@ -8,6 +8,7 @@ using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using front_end.Model;
+using front_end.View;
 using front_end.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,6 +18,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Streams;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -39,26 +41,33 @@ namespace front_end
         private MainPageVM vm = new MainPageVM();
         public MainPage()  {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Color.FromArgb(255, 128, 57, 173);
             titleBar.ButtonBackgroundColor = Color.FromArgb(255, 128, 57, 173);
             webview.Source = new Uri("ms-appx-web:///Assets/index.html");
             TileController.run();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
             vm.Site = DB.getSite();
             changeSite(vm.Site);
             DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var selected = ((ListView)sender).SelectedItem as Article;
             if (selected != null && selected.Title != null) {
                 vm.current = selected;
-                webview.Source = new Uri(selected.Url);
-                webLoadRing.Visibility = Visibility.Visible;
-                shareBtn.Visibility = Visibility.Visible;
+                if (webViewContainer.Visibility == Visibility.Visible) {
+                    webview.Source = new Uri(selected.Url);
+                    webLoadRing.Visibility = Visibility.Visible;
+                    shareBtn.Visibility = Visibility.Visible;
+                }
+                else {
+                    Frame.Navigate(typeof(ArticlePage), selected);
+                }
             }
         }
 
@@ -120,7 +129,7 @@ namespace front_end
             vm.Articles.Clear();
             vm.Articles.Add(new BottomProcessRing());
             var list = await Article.getArticles(vm.Site, vm.Page);
-            while (list.Count < 20) {
+            while (list.Count > 0 && !(list.First() is NoMore) && list.Count < 20) {
                 vm.Page++;
                 (await Article.getArticles(vm.Site, vm.Page)).ForEach(list.Add);
             }

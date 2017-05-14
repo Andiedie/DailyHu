@@ -78,6 +78,17 @@ namespace front_end
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            }
+        }
+
+        private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e) {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+            if (rootFrame.CanGoBack && e.Handled == false) {
+                e.Handled = true;
+                rootFrame.GoBack();
             }
         }
 
