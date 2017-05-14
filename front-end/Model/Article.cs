@@ -48,7 +48,7 @@ namespace front_end.Model {
 
         public static async Task<List<Article>> getArticles(Site site, int page) {
             try {
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://localhost:8008/list?site={site}&page={page}");
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://localhost:8008/list?site={site.Name}&page={page}");
                 request.Method = "GET";
                 HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 Stream stream = response.GetResponseStream();

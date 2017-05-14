@@ -105,6 +105,7 @@
     <Compile Include="Model\Site.cs" />
     <Compile Include="Model\TemplateMatch.cs" />
     <Compile Include="Model\TileController.cs" />
+    <Compile Include="Model\TileImage.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="View\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
@@ -121,29 +122,9 @@
     <None Include="front-end_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Icon\cnode.jpg" />
-    <Content Include="Assets\Icon\sina.jpg" />
-    <Content Include="Assets\Icon\tuicool.jpg" />
     <Content Include="Assets\index.html" />
     <Content Include="Assets\particles-js\particles.min.js" />
-    <Content Include="Assets\Icon\zhihu.jpg" />
     <Content Include="Assets\share.png" />
-    <Content Include="Assets\Site\cnode-l.jpg" />
-    <Content Include="Assets\Site\cnode-m.jpg" />
-    <Content Include="Assets\Site\cnode-s.jpg" />
-    <Content Include="Assets\Site\cnode-w.png" />
-    <Content Include="Assets\Site\sina-l.png" />
-    <Content Include="Assets\Site\sina-m.png" />
-    <Content Include="Assets\Site\sina-s.png" />
-    <Content Include="Assets\Site\sina-w.jpg" />
-    <Content Include="Assets\Site\tuicool-l.jpg" />
-    <Content Include="Assets\Site\tuicool-m.jpg" />
-    <Content Include="Assets\Site\tuicool-s.jpg" />
-    <Content Include="Assets\Site\tuicool-w.jpg" />
-    <Content Include="Assets\Site\zhihu-l.jpg" />
-    <Content Include="Assets\Site\zhihu-m.png" />
-    <Content Include="Assets\Site\zhihu-s.png" />
-    <Content Include="Assets\Site\zhihu-w.jpg" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square310x310Logo.scale-200.png" />

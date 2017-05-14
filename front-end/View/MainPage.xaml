@@ -50,23 +50,25 @@
     <SplitView IsPaneOpen="False"
                DisplayMode="CompactOverlay">
         <SplitView.Pane>
-            <StackPanel>
-                <Button x:Name="tuicoolBtn" Background="Transparent" Width="48" Height="48" Click="switch2Tuicool">
-                    <Image Source="../Assets/Icon/tuicool.jpg" Width="25"/>
-                </Button>
-                <Button x:Name="cnodeBtn" Background="Transparent" Width="48" Height="48" Click="switch2Cnode">
-                    <Image Source="../Assets/Icon/cnode.jpg" Width="25"/>
-                </Button>
-                <Button x:Name="zhihuBtn" Background="Transparent" Width="48" Height="48" Click="switch2Zhihu">
-                    <Image Source="../Assets/Icon/zhihu.jpg" Width="25"/>
-                </Button>
-                <Button x:Name="sinaBtn" Background="Transparent" Width="48" Height="48" Click="switch2Sina">
-                    <Image Source="../Assets/Icon/sina.jpg" Width="25"/>
-                </Button>
-            </StackPanel>
+            <ListView x:Name="siteList"
+                      ItemsSource="{x:Bind vm.Sites, Mode=OneWay}"
+                      SelectionMode="Single" SelectionChanged="siteClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Site">
+                        <UserControl>
+                            <Image HorizontalAlignment="Left" Source="{x:Bind Icon}" Width="25"/>
+                        </UserControl>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </SplitView.Pane>
         <UserControl>
-            <Grid Background="WhiteSmoke">
+            <Grid x:Name="adaptiveRoot" Background="WhiteSmoke">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
                         <VisualState x:Name="Narrow">

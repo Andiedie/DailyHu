@@ -41,19 +41,33 @@ namespace front_end
         private MainPageVM vm = new MainPageVM();
         public MainPage()  {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
+            // 设置title栏颜色
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Color.FromArgb(255, 128, 57, 173);
             titleBar.ButtonBackgroundColor = Color.FromArgb(255, 128, 57, 173);
-            webview.Source = new Uri("ms-appx-web:///Assets/index.html");
-            TileController.run();
-            vm.Site = DB.getSite();
-            changeSite(vm.Site);
+            // 设置livetile
+            vm.siteGot += TileController.run;
+            // 加载首页
+            vm.siteGot += (sites) => update();
+            // 数据库存储
+            vm.siteGot += DB.update;
+            // 导航相关
+            NavigationCacheMode = NavigationCacheMode.Enabled;
             DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
+            // Adaptive UI
+            var groups = VisualStateManager.GetVisualStateGroups(adaptiveRoot);
+            groups[0].CurrentStateChanged += OnCurrentStateChanged;
+        }
+
+        private void OnCurrentStateChanged(object sender, VisualStateChangedEventArgs e) {
+            if (e.NewState.Name == "Narrow" && vm.current != null) {
+                Frame.Navigate(typeof(ArticlePage), vm.current);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            webview.Source = new Uri(vm.current == null ? "ms-appx-web:///Assets/index.html" : vm.current.Url);
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -86,42 +100,10 @@ namespace front_end
             }
         }
 
-        private void switch2Tuicool(object sender, RoutedEventArgs e) {
-            changeSite(Site.tuicool);
-        }
-
-        private void switch2Zhihu(object sender, RoutedEventArgs e) {
-            changeSite(Site.zhihu);
-        }
-
-        private void switch2Cnode(object sender, RoutedEventArgs e) {
-            changeSite(Site.cnode);
-        }
-
-        private void switch2Sina(object sender, RoutedEventArgs e) {
-            changeSite(Site.sina);
-        }
-
-        private void changeSite(Site site) {
+        private void siteClick(object sender, SelectionChangedEventArgs e) {
+            var site = siteList.SelectedItem as Site;
             vm.Site = site;
             vm.Page = 1;
-            var trans = new SolidColorBrush(Colors.Transparent);
-            var selected = new SolidColorBrush(Color.FromArgb(76,128,57,123));
-            tuicoolBtn.Background = trans;
-            zhihuBtn.Background = trans;
-            cnodeBtn.Background = trans;
-            sinaBtn.Background = trans;
-            switch (site) {
-                case Site.zhihu:
-                    zhihuBtn.Background = selected; break;
-                case Site.tuicool:
-                    tuicoolBtn.Background = selected; break;
-                case Site.cnode:
-                    cnodeBtn.Background = selected; break;
-                case Site.sina:
-                    sinaBtn.Background = selected; break;
-            }
-            DB.updateSite(site);
             update();
         }
 

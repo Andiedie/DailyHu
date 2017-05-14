@@ -30,6 +30,14 @@ namespace front_end.View {
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Color.FromArgb(255, 128, 57, 173);
             titleBar.ButtonBackgroundColor = Color.FromArgb(255, 128, 57, 173);
+            var groups = VisualStateManager.GetVisualStateGroups(adaptiveRoot);
+            groups[0].CurrentStateChanged += OnCurrentStateChanged;
+        }
+
+        private void OnCurrentStateChanged(object sender, VisualStateChangedEventArgs e) {
+            if (e.NewState.Name == "Wide") {
+                Frame.GoBack();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
