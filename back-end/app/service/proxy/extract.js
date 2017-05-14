@@ -26,6 +26,9 @@ const extract = async (html, selector) => {
   // 绕过防盗链
   $('head').append('<meta name="referrer" content="never">');
 
+  // 增加全局padding
+  $('body').css('padding', '20px');
+
   // 屏蔽页面跳转
   // $('a').removeAttr('href').removeAttr('target').removeAttr('rel');
 
