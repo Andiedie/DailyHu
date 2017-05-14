@@ -20,7 +20,7 @@ namespace front_end.Model {
         public Site() { }
         public static async Task<List<Site>> getSites() {
             try {
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://localhost:8008/meta");
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create($"http://andiedie.cc:8008/meta");
                 request.Method = "GET";
                 HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 Stream stream = response.GetResponseStream();
