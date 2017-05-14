@@ -1,6 +1,7 @@
 const service = require('../service');
 const assert = require('assert');
 
+// API：获取数据源的目录
 module.exports = async ctx => {
   const {site, page} = ctx.query;
 

@@ -1,5 +1,10 @@
 const _ = require('lodash');
 
+/**
+ * 工具函数，将对象的所有字段trim一遍
+ * @param obj
+ * @returns {{}}
+ */
 module.exports = function (obj) {
   const res = {};
   Object.assign(res, obj);

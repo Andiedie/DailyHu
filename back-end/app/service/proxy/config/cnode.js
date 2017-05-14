@@ -31,6 +31,8 @@ module.exports = {
     const topicWrapper = $('.topic_full_title');
     topicWrapper.children('span').remove();
     const topic = topicWrapper.text();
+
+    // 标题统一用h2包裹
     topicWrapper.replaceWith(`<h2>${topic}</h2>`);
 
     return $;

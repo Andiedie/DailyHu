@@ -24,8 +24,10 @@ const getList = async function (site, pageNum) {
 
   assert(siteConfig, 'no such site registered.');
   assert(pageNum <= siteConfig.maximumPage, 'page number exceeded.');
+  // 根据对应页的url，获得该页目录数据
   const data = (await axios.get(siteConfig.listUrl(pageNum))).data;
 
+  // 对于json和html两种类型数据分别处理
   switch (siteConfig.listType) {
     case 'html':
       return processHtml(siteConfig, data);

@@ -4,6 +4,7 @@ const axios = require('axios');
 const url = require('url');
 const globalConfig = require('../../../config');
 
+// 元数据，提供存储在腾讯云COS上的logo和tile图标
 const getMetadata = async function () {
   return Object.keys(config)
     .map(name => {

@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const extract = async (html, selector) => {
   let $ = cheerio.load(html);
   if ($('body').length === 0) {
+    // 对于部分json型数据，可能并不是一个完整的html结构
     // need to be wrapped
     $ = cheerio.load(`
       <html>
@@ -14,6 +15,7 @@ const extract = async (html, selector) => {
     $('body').append(html);
   }
   if (selector) {
+    // 提取selector指定的文章主体
     const main = $(selector);
     $('body > *').remove();
     $('body').append(main);

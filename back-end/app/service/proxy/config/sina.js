@@ -22,6 +22,7 @@ const config = {
     res.thumbnail = item.img;
     res.title = item.title;
 
+    // 筛掉新浪新闻中的图站和视频站等不好展示的子栏目
     if (config.hostname.indexOf(url.parse(item.link).hostname) === -1) {
       return null;
     }
@@ -36,12 +37,11 @@ const config = {
     $('body').empty();
     $('body').append(keep);
 
-    // TO-DO: check whether is empty
-
     return $;
   }
 };
 
+// 新浪新闻的各个子版块的url前缀
 ['news', 'k', 'mil', 'ent', 'sports', 'finance', 'tech', 'zx']
   .forEach(prefix => {
     config.hostname.push(`${prefix}.sina.cn`);

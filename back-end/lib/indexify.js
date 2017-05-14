@@ -1,3 +1,7 @@
+/**
+ * 工具模块，将指定目录下的所有.js文件聚合
+ */
+
 const path = require('path');
 const fs = require('fs');
 const stack = require('callsite');

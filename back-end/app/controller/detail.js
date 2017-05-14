@@ -1,6 +1,7 @@
 const service = require('../service');
 const assert = require('assert');
 
+// API接口：获取文章详情
 module.exports = async ctx => {
   try {
     const {url} = ctx.query;
